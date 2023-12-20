@@ -17,6 +17,10 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    if (!query && currentPage === 1) {
+      return;
+    }
+
     const fetchImages = async () => {
       try {
         setIsLoading(true);
@@ -38,9 +42,7 @@ const App = () => {
       }
     };
 
-    if (query !== '' || currentPage !== 1) {
-      fetchImages();
-    }
+    fetchImages();
   }, [query, currentPage]);
 
   const handleSearch = newQuery => {
